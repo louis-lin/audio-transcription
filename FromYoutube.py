@@ -1,11 +1,11 @@
 from __future__ import unicode_literals
-# Recieve Youtube link as input
-#LINK = 'https://www.youtube.com/watch?v=dF3Dcol5XLg'
+## Recieve Youtube link as input
 LINK = 'https://www.youtube.com/watch?v=-122SRX3sbI'
-#LINK = 'https://www.youtube.com/watch?v=_I7uGjDJ0lM'
+# Need to include the ability to write sys.argvs
 
-# Download Youtube Video as Audio file
+## Download Youtube Video as Audio file
 import youtube_dl
+# Set the download to only extrat the audio and convert it to a wav format
 options = {
   'format': 'bestaudio/best',
   'extractaudio' : True,  # only keep the audio
@@ -13,11 +13,11 @@ options = {
   'outtmpl': '%(title)s',    # name the file the ID of the video
   'noplaylist' : True,    # only download single song, not playlist
 }
+# Downloads the audio
+with youtube_dl.YoutubeDL(options) as ydl:
+   ydl.download([LINK])
 
-#with youtube_dl.YoutubeDL(options) as ydl:
-#   ydl.download([LINK])
-
-# Convert the wav file
+## Convert the wav file
 import ffmpeg
 (ffmpeg
 .input('The Benefits of Crying')
@@ -25,10 +25,10 @@ import ffmpeg
 .run(cmd='/usr/local/Cellar/ffmpeg/4.2.3/bin/ffmpeg')
 )
 
-# Tanscribe audio file                                                         
+## Tanscribe audio file                                                         
 import speech_recognition as sr
-import glob
-import os
+import glob, os
+
 Transcript = open('Transcription.txt','w')
 r = sr.Recognizer()
 files = glob.glob("*.wav")
