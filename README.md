@@ -1,2 +1,2 @@
 # audio-transcription
-This project serves to use python to transcribe audio.
+This project uses python to transcribe audio.
